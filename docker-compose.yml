@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: travel_recommendation_app
+    volumes:
+      - .:/app
+    networks:
+      - qdrant-network
+  qdrant:
+    image: qdrant/qdrant
+    container_name: qdrant
+    ports:
+      - "6333:6333"
+    networks:
+      - qdrant-network
+
+networks:
+  qdrant-network:
+    driver: bridge
